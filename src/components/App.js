@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Post from "./Post/Post";
+import Search from "./Header/Search/Search";
 
 import "./App.css";
 
 import Header from "./Header/Header";
 import Compose from "./Compose/Compose";
-import Post from "./Post/Post";
 
 class App extends Component {
   constructor() {
@@ -44,7 +45,7 @@ class App extends Component {
 
   createPost(text) {
     axios
-      .post("https://practiceapi.devmountain.com/api/posts", { text })
+      .post("https://practiceapi.devmountain.com/api/posts/", { text })
       .then(res => {
         this.setState({ posts: res.data });
       });
@@ -63,11 +64,11 @@ class App extends Component {
           {posts.map(post => (
             <Post
               key={post.id}
-              id={post.id}
               text={post.text}
               date={post.date}
               updatePostFn={this.updatePost}
               deletePostFn={this.deletePost}
+              id={post.id}
             />
           ))}
         </section>
